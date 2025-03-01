@@ -21,7 +21,7 @@ export default function Home() {
         </p>
 
         <div className="mt-6 flex space-x-4">
-          <Link href="/get-started">
+          <Link href="/signup">
             <Button className="bg-blue-500 text-white">Get Started</Button>
           </Link>
           <Link href="/docs">
@@ -37,7 +37,7 @@ export default function Home() {
         animate={{ opacity: 1 }} 
         transition={{ duration: 1.5 }}
       >
-        <h2 className="text-4xl font-bold text-white">Why CodeX?</h2>
+        <h2 className="text-4xl font-bold text-white">Why Createathon?</h2>
         <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
@@ -66,10 +66,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Footer */}
-      <footer className="mt-16 py-6 text-center text-gray-400">
-        <p>&copy; 2025 CodeX. Built for developers.</p>
-      </footer>
+      
     </div>
   );
 }
@@ -111,12 +108,15 @@ const features = [
 
 // ✅ Testimonials Data
 const testimonials = [
-  { name: 'Alice Johnson', feedback: 'CodeX made my workflow 10x faster! Highly recommend to all developers.' },
+  { name: 'Alice Johnson', feedback: 'Createathon made my workflow 10x faster! Highly recommend to all developers.' },
+  { name: 'Mark Smith', feedback: 'AI debugging is a game-changer. Found and fixed bugs in minutes!' },
+  { name: 'Alice Johnson', feedback: 'Craetathon made my workflow 10x faster! Highly recommend to all developers.' },
   { name: 'Mark Smith', feedback: 'AI debugging is a game-changer. Found and fixed bugs in minutes!' },
 ];
 
 // ✅ Testimonial Card
 function TestimonialCard({ name, feedback }) {
+  
   return (
     <motion.div className="p-6 bg-gray-800 rounded-xl shadow-lg text-left">
       <p className="text-gray-300 text-sm">"{feedback}"</p>
