@@ -1,129 +1,126 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-export default function LandingPage() {
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 to-blue-300 text-center px-6 pt-56">
+    <div className="relative min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
       {/* Hero Section */}
-      <motion.h1 
+      <motion.div 
         initial={{ opacity: 0, y: -50 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 1 }}
-        className="text-5xl  md:text-7xl font-extrabold text-gray-900 drop-shadow-lg"
+        className="flex flex-col items-center justify-center min-h-screen text-center"
       >
-        Welcome to <span className="text-blue-600">Createathon</span>
-      </motion.h1>
-      <motion.p 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ duration: 1.5 }}
-        className="text-lg md:text-xl text-gray-700 mt-4 max-w-2xl"
-      >
-        Join interactive coding challenges, track your progress, and compete with others. Enhance your skills and become a top creator!
-      </motion.p>
-      <motion.div 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ duration: 2 }}
-        className="mt-6 flex space-x-4"
-      >
-        <Link href="/challenges">
-          <Button className="px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
-            Get Started
-          </Button>
-        </Link>
-        <Link href="/community">
-          <Button className="px-6 py-3 bg-gray-200 text-gray-800 text-lg rounded-lg shadow-lg hover:bg-gray-300 transition-transform transform hover:scale-105">
-            Join Community
-          </Button>
-        </Link>
-      </motion.div>
-      <motion.img 
-        src="/hero.webp" 
-        alt="Coding Challenges" 
-        className="mt-10 w-full max-w-2xl drop-shadow-lg"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5 }}
-      />
-      
-      {/* Key Features Section */}
-      <section className="mt-16 w-full max-w-4xl text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Why Choose Createathon?</h2>
-        <motion.ul 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="mt-6 space-y-4 text-gray-700"
-        >
-          <li className="bg-white p-4 shadow-lg rounded-lg">✅ Interactive Coding Challenges</li>
-          <li className="bg-white p-4 shadow-lg rounded-lg">🎯 Real-time Leaderboards</li>
-          <li className="bg-white p-4 shadow-lg rounded-lg">🏆 Reward-based Progress System</li>
-          <li className="bg-white p-4 shadow-lg rounded-lg">🤝 Community-driven Learning</li>
-        </motion.ul>
-      </section>
-      
-      {/* Showcase Top Challenges */}
-      <section className="mt-16 w-full max-w-4xl text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Top Challenges</h2>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 shadow-lg rounded-lg"
-          >
-            <h3 className="text-xl font-semibold text-gray-900">Hack the Algorithm</h3>
-            <p className="text-gray-700">Solve challenging algorithms to enhance your problem-solving skills.</p>
-          </motion.div>
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 shadow-lg rounded-lg"
-          >
-            <h3 className="text-xl font-semibold text-gray-900">Web Dev Showdown</h3>
-            <p className="text-gray-700">Build and optimize web applications with real-world scenarios.</p>
-          </motion.div>
+        <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+          Develop Faster. Deploy Smarter.
+        </h1>
+        <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl">
+          The ultimate cloud-powered coding and deployment platform for modern developers.
+        </p>
+
+        <div className="mt-6 flex space-x-4">
+          <Link href="/get-started">
+            <Button className="bg-blue-500 text-white">Get Started</Button>
+          </Link>
+          <Link href="/docs">
+            <Button className="border border-white text-white">Learn More</Button>
+          </Link>
         </div>
-      </section>
-      
-      {/* Leaderboard Highlights */}
-      <section className="mt-16 w-full max-w-4xl text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Leaderboard Highlights</h2>
-        <motion.div 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          transition={{ duration: 2 }}
-          className="mt-6 bg-white p-6 shadow-lg rounded-lg"
-        >
-          <p className="text-gray-700">🔥 <strong>Top Performer:</strong> John Doe (5000 Points)</p>
-          <p className="text-gray-700">🏅 <strong>Runner-up:</strong> Jane Smith (4700 Points)</p>
+      </motion.div>
+
+      {/* Features Section */}
+      <motion.section 
+        className="mt-16 px-6 md:px-20 max-w-6xl mx-auto text-center"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 1.5 }}
+      >
+        <h2 className="text-4xl font-bold text-white">Why CodeX?</h2>
+        <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
         </motion.div>
-      </section>
-      
-      {/* Sign-up/Login Buttons */}
-      <div className="mt-16 flex space-x-4">
-        <Link href="/signup">
-          <Button className="px-6 py-3 bg-green-600 text-white text-lg rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-105">
-            Sign Up
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button className="px-6 py-3 bg-gray-800 text-white text-lg rounded-lg shadow-lg hover:bg-gray-900 transition-transform transform hover:scale-105">
-            Login
-          </Button>
-        </Link>
-      </div>
+      </motion.section>
+
+      {/* Testimonials Section */}
+      <motion.section className="mt-16 px-6 md:px-20 max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-white">What Developers Say</h2>
+        <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} {...testimonial} />
+          ))}
+        </motion.div>
+      </motion.section>
+
+      {/* Call to Action Section */}
+      <motion.section className="mt-16 px-6 md:px-20 max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-white">Get Started Today</h2>
+        <p className="mt-4 text-lg text-gray-300">Join thousands of developers already using CodeX.</p>
+        <div className="mt-6">
+          <Link href="/signup">
+            <Button className="bg-green-500 text-white px-8 py-4 text-xl">Sign Up Now</Button>
+          </Link>
+        </div>
+      </motion.section>
+
+      {/* Footer */}
+      <footer className="mt-16 py-6 text-center text-gray-400">
+        <p>&copy; 2025 CodeX. Built for developers.</p>
+      </footer>
     </div>
   );
 }
 
+// ✅ Button Component
 function Button({ children, className = '', ...props }) {
   return (
-    <button
-      className={`px-4 py-2 rounded-lg font-medium transition ${className}`}
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`px-6 py-3 text-lg rounded-lg shadow-lg transition ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
+  );
+}
+
+// ✅ Feature Card
+function FeatureCard({ icon, title, description }) {
+  return (
+    <motion.div 
+      whileHover={{ scale: 1.05 }}
+      className="p-6 bg-gray-900/70 rounded-xl shadow-lg text-left"
+    >
+      <div className="text-4xl">{icon}</div>
+      <h3 className="text-xl font-semibold text-white mt-2">{title}</h3>
+      <p className="text-gray-300 text-sm">{description}</p>
+    </motion.div>
+  );
+}
+
+// ✅ Feature Data
+const features = [
+  { icon: '🚀', title: 'Lightning Fast Deployment', description: 'Ship your code in seconds with our zero-config deployment system.' },
+  { icon: '⚙️', title: 'AI-Powered Debugging', description: 'Get real-time AI suggestions for fixing your code instantly.' },
+  { icon: '☁️', title: 'Cloud-Based Collaboration', description: 'Work seamlessly with your team in a fully cloud-based dev environment.' },
+];
+
+// ✅ Testimonials Data
+const testimonials = [
+  { name: 'Alice Johnson', feedback: 'CodeX made my workflow 10x faster! Highly recommend to all developers.' },
+  { name: 'Mark Smith', feedback: 'AI debugging is a game-changer. Found and fixed bugs in minutes!' },
+];
+
+// ✅ Testimonial Card
+function TestimonialCard({ name, feedback }) {
+  return (
+    <motion.div className="p-6 bg-gray-800 rounded-xl shadow-lg text-left">
+      <p className="text-gray-300 text-sm">"{feedback}"</p>
+      <h4 className="text-lg font-semibold text-white mt-2">- {name}</h4>
+    </motion.div>
   );
 }

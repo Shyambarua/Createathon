@@ -1,92 +1,84 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { EditorView } from '@codemirror/view';
-import { javascript } from '@codemirror/lang-javascript';
-import { EditorState } from '@codemirror/state';
-import { basicSetup } from 'codemirror';
+// import Editor from '@monaco-editor/react';
 
-
-export default function ChallengePage() {
-  const [code, setCode] = useState('// Write your solution here');
-  const [timeLeft, setTimeLeft] = useState(300); // 5-minute timer
-  const [result, setResult] = useState(null);
-
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearInterval(timer);
-    }
-  }, [timeLeft]);
-
-  const handleSubmit = () => {
-    // Simulate test case execution
-    setResult("✅ All test cases passed!");
-  };
+export default function Challenge() {
+  const [code, setCode] = useState('// Write your solution here...');
+  const [output, setOutput] = useState('');
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-gray-100 p-6">
-      {/* Problem Statement */}
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-lg overflow-y-auto"
-      >
-        <h1 className="text-3xl font-bold text-gray-900">Challenge: Reverse a String</h1>
-        <p className="text-gray-600 mt-2">Difficulty: <span className="font-semibold">Beginner</span></p>
-        <div className="mt-4 text-gray-700">
-          <ReactMarkdown>
-            {`### Problem Statement
-            Given a string, write a function to reverse it.
-            
-            **Example:**
-            
-            \`\`\`js
-            Input: "hello"
-            Output: "olleh"
-            \`\`\`
-            `}
-          </ReactMarkdown>
-        </div>
-        <div className="mt-6">
-          <p className="text-gray-800 font-semibold">Time Left: {timeLeft}s</p>
-        </div>
-      </motion.div>
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex pt-[80px]">
       
-      {/* Code Editor */}
-      <motion.div 
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-lg mt-6 md:mt-0 md:ml-6"
-      >
-        <h2 className="text-2xl font-semibold text-gray-900">Code Editor</h2>
-        <textarea 
-          className="w-full mt-4 p-2 border rounded-lg font-mono text-sm" 
-          rows={10}
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <div className="mt-4 flex justify-between">
-          <Button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700" onClick={handleSubmit}>
-            Submit
-          </Button>
-          {result && <p className="text-green-600 font-semibold">{result}</p>}
+      {/* Left Sidebar */}
+      <div className="w-1/3 p-6 space-y-6 border-r border-gray-700 h-screen overflow-y-auto">
+        {/* Problem Statement */}
+        <motion.div className="p-4 bg-gray-800 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-400">Problem Statement</h2>
+          <p className="text-gray-300 text-sm mt-2">
+            Implement a function to reverse a string without using built-in methods.
+          </p>
+        </motion.div>
+
+        {/* Hint Section */}
+        <motion.div className="p-4 bg-gray-800 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-green-400">Hint</h2>
+          <p className="text-gray-300 text-sm mt-2">
+            Try using a loop and swapping characters from start to end.
+          </p>
+        </motion.div>
+
+        {/* Leaderboard */}
+        <motion.div className="p-4 bg-gray-800 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-yellow-400">Leaderboard</h2>
+          <ul className="text-gray-300 text-sm mt-2 space-y-1">
+            <li>🚀 Alice - 10s</li>
+            <li>⚡ Bob - 12s</li>
+            <li>🔥 Charlie - 15s</li>
+          </ul>
+        </motion.div>
+      </div>
+
+      {/* Right Panel */}
+      <div className="w-2/3 p-6 flex flex-col h-screen overflow-y-auto">
+        
+        {/* Code Editor */}
+        <motion.div className="flex-1 bg-gray-900 p-4 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-purple-400">Code Editor</h2>
+          {/* <Editor
+            height="300px"
+            defaultLanguage="javascript"
+            theme="vs-dark"
+            value={code}
+            onChange={(value) => setCode(value || '')}
+          /> */}
+        </motion.div>
+
+        {/* Test Cases & Output */}
+        <div className="flex mt-6 space-x-6">
+          
+          {/* Test Cases */}
+          <motion.div className="flex-1 p-4 bg-gray-800 rounded-lg shadow">
+            <h2 className="text-xl font-bold text-orange-400">Test Cases</h2>
+            <ul className="text-gray-300 text-sm mt-2 space-y-1">
+              <li>✅ Input: "hello" → Output: "olleh"</li>
+              <li>✅ Input: "world" → Output: "dlrow"</li>
+              <li>❌ Input: "code" → Output: "edoc" (Wrong Answer)</li>
+            </ul>
+          </motion.div>
+
+          {/* Output Section */}
+          <motion.div className="flex-1 p-4 bg-gray-800 rounded-lg shadow">
+            <h2 className="text-xl font-bold text-red-400">Output</h2>
+            <div className="mt-2 p-2 bg-black rounded text-green-400 text-sm">
+              {output || 'Run your code to see output...'}
+            </div>
+          </motion.div>
+
         </div>
-      </motion.div>
+
+      </div>
     </div>
   );
 }
-
-
-function Button({ children, className = '', ...props }) {
-    return (
-      <button className={`px-4 py-2 rounded-lg font-medium transition ${className}`} {...props}>
-        {children}
-      </button>
-    );
-  }
-  
