@@ -2,8 +2,8 @@
 
 // import { useState } from 'react';
 import { motion } from 'framer-motion';
-// import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-// import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Dashboard() {
   // Dummy data
@@ -27,7 +27,7 @@ export default function Dashboard() {
         <motion.div className="p-6 bg-gray-800 rounded-lg shadow flex flex-col items-center">
           <h2 className="text-xl font-bold text-blue-400">Progress Overview</h2>
           <div className="w-24 h-24 mt-4">
-            {/* <CircularProgressbar
+            <CircularProgressbar
               value={userStats.progress}
               text={`${userStats.progress}%`}
               styles={buildStyles({
@@ -35,7 +35,7 @@ export default function Dashboard() {
                 pathColor: '#4F46E5',
                 trailColor: '#2D3748',
               })}
-            /> */}
+            />
           </div>
           <p className="text-gray-400 text-sm mt-3">
             {userStats.completed} / {userStats.totalChallenges} challenges completed

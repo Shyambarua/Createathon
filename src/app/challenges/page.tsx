@@ -2,11 +2,21 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-// import Editor from '@monaco-editor/react';
+import Editor from '@monaco-editor/react';
 
 export default function Challenge() {
   const [code, setCode] = useState('// Write your solution here...');
   const [output, setOutput] = useState('');
+
+  const runCode = () => {
+    try {
+      // eslint-disable-next-line no-new-func
+      const result = new Function(`return (${code})()`)();
+      setOutput(String(result));
+    } catch (error) {
+      setOutput(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex pt-[80px]">
@@ -46,14 +56,22 @@ export default function Challenge() {
         {/* Code Editor */}
         <motion.div className="flex-1 bg-gray-900 p-4 rounded-lg shadow">
           <h2 className="text-xl font-bold text-purple-400">Code Editor</h2>
-          {/* <Editor
+          <Editor
             height="300px"
             defaultLanguage="javascript"
             theme="vs-dark"
             value={code}
             onChange={(value) => setCode(value || '')}
-          /> */}
+          />
         </motion.div>
+
+        {/* Run Button */}
+        <button
+          onClick={runCode}
+          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Run Code
+        </button>
 
         {/* Test Cases & Output */}
         <div className="flex mt-6 space-x-6">
@@ -75,9 +93,7 @@ export default function Challenge() {
               {output || 'Run your code to see output...'}
             </div>
           </motion.div>
-
         </div>
-
       </div>
     </div>
   );
