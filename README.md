@@ -4,11 +4,8 @@
 Create an interactive learning platform where users can participate in coding and knowledge challenges, with seamless integration between a web interface and a Telegram bot. The platform focuses on delivering learning content, tracking progress, and fostering community engagement.
 
 ## Tech Stack
-- **Frontend**: Vite + React, Next.js for server-side rendering
-- **Backend**: Django for core business logic, FastAPI for high-performance microservices
-- **Database**: PostgreSQL for reliable data storage
-- **API Architecture**: RESTful APIs for client-server communication
-- **Auth**: JWT Token
+- **Frontend**: Next.js for server-side rendering
+
 
 ## Getting Started
 1. Clone the repository:
