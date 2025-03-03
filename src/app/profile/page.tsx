@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';

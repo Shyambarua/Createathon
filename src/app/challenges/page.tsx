@@ -10,7 +10,7 @@ export default function Challenge() {
 
   const runCode = () => {
     try {
-      // eslint-disable-next-line no-new-func
+     
       const result = new Function(`return (${code})()`)();
       setOutput(String(result));
     } catch (error) {
@@ -80,9 +80,9 @@ export default function Challenge() {
           <motion.div className="flex-1 p-4 bg-gray-800 rounded-lg shadow">
             <h2 className="text-xl font-bold text-orange-400">Test Cases</h2>
             <ul className="text-gray-300 text-sm mt-2 space-y-1">
-              <li>✅ Input: "hello" → Output: "olleh"</li>
-              <li>✅ Input: "world" → Output: "dlrow"</li>
-              <li>❌ Input: "code" → Output: "edoc" (Wrong Answer)</li>
+              <li>✅ Input: &quot;hello&quot; → Output: &quot;olleh&quot;</li>
+              <li>✅ Input: &quot;world&quot; → Output: &quot;dlrow&quot;</li>
+              <li>❌ Input: &quot;code&quot; → Output: &quot;edoc&quot; (Wrong Answer)</li>
             </ul>
           </motion.div>
 

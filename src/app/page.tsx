@@ -119,7 +119,7 @@ function TestimonialCard({ name, feedback }) {
   
   return (
     <motion.div className="p-6 bg-gray-800 rounded-xl shadow-lg text-left">
-      <p className="text-gray-300 text-sm">"{feedback}"</p>
+      <p className="text-gray-300 text-sm">&quot;{feedback}&quot;</p>
       <h4 className="text-lg font-semibold text-white mt-2">- {name}</h4>
     </motion.div>
   );
