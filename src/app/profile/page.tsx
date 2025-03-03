@@ -2,13 +2,15 @@
 
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 export default function ProfilePage() {
   const user = {
     name: 'Shyam Barua',
-    avatar: '/avtar.jpeg', // Change to actual avatar URL
+    avatar: '/avtar.jpeg', 
     bio: 'MERN Stack Developer | UI/UX Enthusiast | GSoC 2025 Aspirant',
     location: 'KIIT University, India',
     skills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'Next.js', 'AWS', 'UI/UX'],
@@ -32,7 +34,8 @@ export default function ProfilePage() {
         transition={{ duration: 1 }} 
         className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-2xl text-center"
       >
-        <img src={user.avatar} alt="Avatar" className="w-24 h-24 rounded-full mx-auto mb-4 shadow-md border-2 border-green-500" />
+        <Image src={user.avatar} alt="Avatar" width={96} height={96} className="rounded-full mx-auto mb-4 shadow-md border-2 border-green-500" />
+
         <h2 className="text-3xl font-bold text-white">{user.name}</h2>
         <p className="text-gray-400">{user.bio}</p>
         <p className="text-gray-500 mt-2">📍 {user.location}</p>

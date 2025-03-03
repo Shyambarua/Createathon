@@ -32,6 +32,8 @@ export default function Login() {
         className="w-full max-w-md p-8 bg-gray-800 rounded-lg shadow-lg"
       >
         <h2 className="text-3xl font-bold text-center">Welcome Back</h2>
+
+
         <p className="text-gray-400 text-center mt-2">Login to continue</p>
 
         <form className="mt-6" onSubmit={handleSubmit}>
@@ -67,7 +69,8 @@ export default function Login() {
         </form>
 
         <p className="text-gray-400 text-center mt-4">
-          Don't have an account? <Link href="/signup" className="text-blue-400 hover:underline">Sign Up</Link>
+          Don&apos;t have an account? <Link href="/signup" className="text-blue-400 hover:underline">Sign Up</Link>
+
         </p>
       </motion.div>
     </div>
