@@ -17,10 +17,11 @@ export default function Navbar() {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8">
-          <NavLink href="/challenges">Challenges</NavLink>
-          <NavLink href="/community">Community</NavLink>
-          <NavLink href="/dashboard">Dashboard</NavLink>
-          <NavLink href="/profile">Profile</NavLink>
+          <NavLink href="/challenges" mobile={false} onClick={() => {}}>Challenges</NavLink>
+          <NavLink href="/community" mobile={false} onClick={() => {}}>Community</NavLink>
+          <NavLink href="/dashboard" mobile={false} onClick={() => {}}>Dashboard</NavLink>
+          <NavLink href="/profile" mobile={false} onClick={() => {}}>Profile</NavLink>
+
         </div>
         
         {/* Buttons */}
@@ -63,7 +64,8 @@ export default function Navbar() {
 }
 
 // Reusable NavLink Component
-function NavLink({ href, children, mobile, onClick }) {
+function NavLink({ href, children, mobile, onClick }: { href: string; children: React.ReactNode; mobile?: boolean; onClick?: () => void; }) {
+
   return (
     <Link 
       href={href} 

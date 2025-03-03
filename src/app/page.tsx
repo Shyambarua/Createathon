@@ -65,14 +65,12 @@ export default function Home() {
           </Link>
         </div>
       </motion.section>
-
-      
     </div>
   );
 }
 
 // ✅ Button Component
-function Button({ children, className = '', ...props }) {
+function Button({ children, className = '', ...props }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -86,7 +84,7 @@ function Button({ children, className = '', ...props }) {
 }
 
 // ✅ Feature Card
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, title, description }: { icon: string; title: string; description: string }) {
   return (
     <motion.div 
       whileHover={{ scale: 1.05 }}
@@ -115,8 +113,7 @@ const testimonials = [
 ];
 
 // ✅ Testimonial Card
-function TestimonialCard({ name, feedback }) {
-  
+function TestimonialCard({ name, feedback }: { name: string; feedback: string }) {
   return (
     <motion.div className="p-6 bg-gray-800 rounded-xl shadow-lg text-left">
       <p className="text-gray-300 text-sm">&quot;{feedback}&quot;</p>

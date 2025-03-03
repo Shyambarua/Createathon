@@ -10,17 +10,19 @@ export default function Challenge() {
 
   const runCode = () => {
     try {
-     
       const result = new Function(`return (${code})()`)();
       setOutput(String(result));
     } catch (error) {
-      setOutput(`Error: ${error.message}`);
+      if (error instanceof Error) {
+        setOutput(`Error: ${error.message}`);
+      } else {
+        setOutput('Error: An unknown error occurred');
+      }
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex pt-[80px]">
-      
       {/* Left Sidebar */}
       <div className="w-1/3 p-6 space-y-6 border-r border-gray-700 h-screen overflow-y-auto">
         {/* Problem Statement */}
@@ -52,7 +54,6 @@ export default function Challenge() {
 
       {/* Right Panel */}
       <div className="w-2/3 p-6 flex flex-col h-screen overflow-y-auto">
-        
         {/* Code Editor */}
         <motion.div className="flex-1 bg-gray-900 p-4 rounded-lg shadow">
           <h2 className="text-xl font-bold text-purple-400">Code Editor</h2>
@@ -75,7 +76,6 @@ export default function Challenge() {
 
         {/* Test Cases & Output */}
         <div className="flex mt-6 space-x-6">
-          
           {/* Test Cases */}
           <motion.div className="flex-1 p-4 bg-gray-800 rounded-lg shadow">
             <h2 className="text-xl font-bold text-orange-400">Test Cases</h2>
