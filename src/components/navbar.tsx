@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-3xl font-bold text-white tracking-wide">
-          CRAETEATHON
+          CRAETATHON
         </Link>
         
         {/* Desktop Menu */}
