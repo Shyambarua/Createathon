@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { questions } from '../../data/questions';
+import { questions } from '../../data/questions'; // Adjust the import path as necessary
 import type { Question } from '@/types/questions';
 import Editor from '@monaco-editor/react';
 import { motion } from 'framer-motion';
@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 export default function QuestionPage() {
   const { id } = useParams();
   const [question, setQuestion] = useState<Question | null>(null);
-  const [code, setCode] = useState('// Write your solution here...');
+  const [code, setCode] = useState('// Write your solution and assign output to `result`');
   const [output, setOutput] = useState('');
 
   useEffect(() => {
@@ -20,7 +20,9 @@ export default function QuestionPage() {
 
   const runCode = () => {
     try {
-      const result = new Function(`return (${code})()`)();
+      const fullCode = `${code};\nreturn typeof result !== 'undefined' ? result : undefined;`;
+      const func = new Function(fullCode);
+      const result = func();
       setOutput(String(result));
     } catch (error) {
       if (error instanceof Error) {
@@ -39,9 +41,7 @@ export default function QuestionPage() {
       <div className="w-1/3 p-4 border-r border-gray-700 space-y-6">
         <motion.div className="bg-gray-800 p-4 rounded-lg shadow">
           <h2 className="text-xl font-bold text-blue-400">Problem: {question.title}</h2>
-          <p className="text-sm mt-2 text-white/80">
-            Write a function to solve this problem. Make sure you cover edge cases.
-          </p>
+          <p className="text-sm mt-2 text-white/80">{question.description}</p>
           <div className="mt-4">
             <span className="font-semibold">Difficulty: </span>
             <span
@@ -61,7 +61,7 @@ export default function QuestionPage() {
 
         <motion.div className="bg-gray-800 p-4 rounded-lg shadow">
           <h3 className="font-bold text-green-400 text-lg">Hint</h3>
-          <p className="text-sm text-white/80 mt-2">Think about using a hash map or two pointers.</p>
+          <p className="text-sm text-white/80 mt-2">{question.hint}</p>
         </motion.div>
       </div>
 
@@ -76,6 +76,9 @@ export default function QuestionPage() {
             value={code}
             onChange={(value) => setCode(value || '')}
           />
+          <p className="text-xs text-white/50 mt-1">
+            ⚠️ Assign your final output to a variable named <code className="text-green-400">result</code>
+          </p>
         </motion.div>
 
         <button
