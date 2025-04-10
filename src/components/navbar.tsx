@@ -17,7 +17,7 @@ export default function Navbar() {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8">
-          <NavLink href="/challenges" mobile={false} onClick={() => {}}>Challenges</NavLink>
+          <NavLink href="/questions" mobile={false} onClick={() => {}}>Challenges</NavLink>
           <NavLink href="/community" mobile={false} onClick={() => {}}>Community</NavLink>
           <NavLink href="/dashboard" mobile={false} onClick={() => {}}>Dashboard</NavLink>
           <NavLink href="/profile" mobile={false} onClick={() => {}}>Profile</NavLink>
