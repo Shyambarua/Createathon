@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { questions } from '@/data/questions';
+import { questions } from '../app/data/questions';
 
 export default function QuestionTable() {
   return (
