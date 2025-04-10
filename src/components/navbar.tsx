@@ -46,7 +46,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-gray-900 bg-opacity-90 backdrop-blur-lg shadow-md px-6 py-4 flex flex-col space-y-4">
-          <NavLink href="/challenges" mobile onClick={() => setIsOpen(false)}>Challenges</NavLink>
+          <NavLink href="/questions" mobile onClick={() => setIsOpen(false)}>Challenges</NavLink>
           <NavLink href="/dashboard" mobile onClick={() => setIsOpen(false)}>Dashboard</NavLink>
           <NavLink href="/community" mobile onClick={() => setIsOpen(false)}>Community</NavLink>
           <NavLink href="/profile" mobile onClick={() => setIsOpen(false)}>Profile</NavLink>

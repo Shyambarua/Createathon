@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios, { AxiosError } from "axios";
 
 export default function Chatbot() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -11,40 +12,46 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [botTyping, setBotTyping] = useState(false);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
 
-    setMessages([...messages, { sender: "user", text: input }]);
+    // Add user message
+    const userMessage = { sender: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setBotTyping(true);
 
-    setTimeout(() => {
-      setBotTyping(false);
+    try {
+      // Fetch AI response
+      const response = await getBotResponse(input);
+
+      // Add bot response
+      const botMessage = { sender: "bot", text: response };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      const errorMessage = error instanceof AxiosError 
+        ? error.response?.data?.error || error.message
+        : "Something went wrong";
       setMessages((prev) => [
         ...prev,
-        {
-          sender: "bot",
-          text: getBotResponse(input),
-        },
+        { sender: "bot", text: `Error: ${errorMessage}` },
       ]);
-    }, 1500);
+    } finally {
+      setBotTyping(false);
+    }
   };
 
-  const getBotResponse = (userInput: string) => {
-    const lowerInput = userInput.toLowerCase();
-    if (lowerInput.includes("hi") || lowerInput.includes("hello")) {
-      return "Hello! 😊 How can I assist you today?";
-    } else if (lowerInput.includes("help")) {
-      return "Sure! Let me know what you're looking for. 🤖";
-    } else if (lowerInput.includes("thanks")) {
-      return "You're welcome! ✨";
-    }
-    return "Hmm... I'm still learning. But I'm here to help! 😊";
+  // Function to fetch response from our API route
+  const getBotResponse = async (userInput: string) => {
+    const res = await axios.post('/api/chat', {
+      message: userInput
+    });
+    return res.data.reply;
   };
 
   return (
     <>
-      {/* Chatbot Floating Button */}
+      {/* Floating Button */}
       <div className="fixed bottom-6 right-6">
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -55,27 +62,21 @@ export default function Chatbot() {
         </motion.button>
       </div>
 
-      {/* Chatbot Window */}
+      {/* Chat Window */}
       {chatOpen && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="fixed bottom-16 right-6 w-80 p-4 bg-gray-900 rounded-lg shadow-xl h-72 flex flex-col border border-gray-700"
         >
-          {/* Header */}
           <div className="flex items-center justify-between border-b border-gray-700 pb-2">
             <div className="flex items-center gap-2">
-              <span className="bg-green-400 w-8 h-8 rounded-full flex items-center justify-center text-black font-bold">
-                🤖
-              </span>
-              <h2 className="text-lg font-bold text-green-400">Creatathon Bot</h2>
+              <span className="bg-green-400 w-8 h-8 rounded-full flex items-center justify-center text-black font-bold">🤖</span>
+              <h2 className="text-lg font-bold text-green-400">ChatGPT Assistant</h2>
             </div>
-            <button onClick={() => setChatOpen(false)} className="text-gray-400 hover:text-red-500">
-              ❌
-            </button>
+            <button onClick={() => setChatOpen(false)} className="text-gray-400 hover:text-red-500">❌</button>
           </div>
 
-          {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto mt-2 space-y-2 scrollbar-hide">
             {messages.map((msg, index) => (
               <motion.div
@@ -105,7 +106,6 @@ export default function Chatbot() {
             )}
           </div>
 
-          {/* Input Field */}
           <div className="mt-4 flex">
             <input
               type="text"
@@ -113,6 +113,7 @@ export default function Chatbot() {
               onChange={(e) => setInput(e.target.value)}
               className="flex-1 p-2 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none"
               placeholder="Type a message..."
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
             <motion.button
               whileTap={{ scale: 0.9 }}
