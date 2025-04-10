@@ -1,25 +1,22 @@
-import type { Question } from '@/types/questions';
+import type { Question } from '../../types/questions';
 
 export const questions: Question[] = [
-    {
-      id: '1',
-      title: 'Two Sum',
-      difficulty: 'Easy',
-      status: 'Solved',
-      acceptance: 48.1,
-    },
-    {
-      id: '2',
-      title: 'Longest Substring Without Repeating',
-      difficulty: 'Medium',
-      status: 'Unsolved',
-      acceptance: 34.5,
-    },
-    {
-      id: '3',
-      title: 'Median of Two Sorted Arrays',
-      difficulty: 'Hard',
-      status: 'Unsolved',
-      acceptance: 29.1,
-    },
+  {
+    id: '1',
+    title: 'Sum of Two Numbers',
+    description: 'Write a function that takes two numbers and returns their sum.',
+    difficulty: 'Easy',
+    status: 'Solved',
+    acceptance: 95,
+    hint: 'Use the + operator to add two numbers.',
+  },
+  {
+    id: '2',
+    title: 'Find Maximum',
+    description: 'Write a function that returns the maximum of three numbers.',
+    difficulty: 'Easy',
+    status: 'Unsolved',
+    acceptance: 89,
+    hint: 'Use Math.max() or conditional statements.',
+  },
 ];

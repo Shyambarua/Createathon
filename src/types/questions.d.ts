@@ -3,6 +3,7 @@ export type Question = {
   title: string;
   description: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
+  status: 'Solved' | 'Unsolved';
   acceptance: number;
   hint: string;
 };
